@@ -1,0 +1,10 @@
+<tr>
+  <td>{{ p.fecha|date:"d/m/Y H:i" }}</td>
+  <td>{{ p.liga.nombre }}</td>
+  <td><a href="{% url 'partido_detail' p.pk %}">{{ p.local }} <strong>{{ p.goles_local }} - {{ p.goles_visita }}</strong> {{ p.visita }}</a></td>
+  <td><span class="badge {{ p.estado }}">{{ p.get_estado_display }}</span></td>
+  <td>
+    {% if es_admin or es_planillero %}<a href="{% url 'partido_marcador' p.pk %}">Marcador</a>{% endif %}
+    {% if es_admin %} · <a href="{% url 'partido_update' p.pk %}">Editar</a> · <a href="{% url 'partido_delete' p.pk %}">Borrar</a>{% endif %}
+  </td>
+</tr>

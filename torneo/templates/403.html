@@ -1,0 +1,7 @@
+{% extends "torneo/base.html" %}
+{% block title %}Sin permiso{% endblock %}
+{% block content %}
+<h1>403 · Sin permiso</h1>
+<p>Tu rol no permite realizar esta acción.</p>
+<a class="btn" href="{% url 'partido_list' %}">Volver al inicio</a>
+{% endblock %}

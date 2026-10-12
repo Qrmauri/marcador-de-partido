@@ -1,0 +1,11 @@
+{% extends "torneo/base.html" %}
+{% block title %}Ingresar{% endblock %}
+{% block content %}
+<h1>Ingresar</h1>
+<form method="post" class="card">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="hidden" name="next" value="{{ next }}">
+  <button class="btn" type="submit">Entrar</button>
+</form>
+{% endblock %}

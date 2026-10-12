@@ -1,0 +1,15 @@
+<nav>
+  <strong>⚽ Marcador en Vivo</strong>
+  <a href="{% url 'partido_list' %}">Partidos</a>
+  <a href="{% url 'liga_list' %}">Ligas</a>
+  <a href="{% url 'equipo_list' %}">Equipos</a>
+  <a href="{% url 'jugador_list' %}">Jugadores</a>
+  <span class="sp">
+    {% if user.is_authenticated %}
+      {{ user.username }} · <span class="badge">{{ rol }}</span>
+      <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="btn sec" type="submit">Salir</button></form>
+    {% else %}
+      <a class="btn" href="{% url 'login' %}">Ingresar</a>
+    {% endif %}
+  </span>
+</nav>

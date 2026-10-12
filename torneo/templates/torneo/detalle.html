@@ -1,0 +1,12 @@
+{% extends "torneo/base.html" %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+<div class="card"><h1>{{ titulo }}</h1>
+  {% for etiqueta, valor in campos %}<p><strong>{{ etiqueta }}:</strong> {{ valor }}</p>{% endfor %}
+</div>
+<a class="btn sec" href="{% url prefijo|add:'_list' %}">Volver</a>
+{% if es_admin %}
+  <a class="btn" href="{% url prefijo|add:'_update' object.pk %}">Editar</a>
+  <a class="btn peligro" href="{% url prefijo|add:'_delete' object.pk %}">Borrar</a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "torneo/base.html" %}
+{% block title %}Partidos · Marcador en Vivo{% endblock %}
+{% block content %}
+<h1>Partidos</h1>
+<form method="get" class="card">
+  <select name="liga"><option value="">Todas las ligas</option>
+    {% for l in ligas %}<option value="{{ l.pk }}" {% if liga_sel == l.pk|stringformat:"s" %}selected{% endif %}>{{ l }}</option>{% endfor %}
+  </select>
+  <select name="estado"><option value="">Todos los estados</option>
+    {% for val, etq in estados %}<option value="{{ val }}" {% if estado_sel == val %}selected{% endif %}>{{ etq }}</option>{% endfor %}
+  </select>
+  <button class="btn" type="submit">Filtrar</button>
+  {% if es_admin %}<a class="btn sec" href="{% url 'partido_create' %}">+ Nuevo partido</a>{% endif %}
+</form>
+<table>
+  <tr><th>Fecha</th><th>Liga</th><th>Partido</th><th>Estado</th><th></th></tr>
+  {% for p in partidos %}{% include "torneo/partials/_partido.html" %}
+  {% empty %}<tr><td colspan="5">No hay partidos.</td></tr>{% endfor %}
+</table>
+{% if is_paginated %}<p>
+  {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">« Anterior</a>{% endif %}
+  Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+  {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Siguiente »</a>{% endif %}
+</p>{% endif %}
+{% endblock %}

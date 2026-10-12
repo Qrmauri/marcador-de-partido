@@ -1,0 +1,22 @@
+# Entornos virtuales y archivos generados por Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Datos y configuraciones locales
+*.sqlite3
+*.sqlite3-journal
+.env
+.env.*
+!.env.example
+*.log
+
+# Archivos generados y temporales
+staticfiles/
+media/
+.docx_qa/
+*.zip
+.DS_Store
+Thumbs.db

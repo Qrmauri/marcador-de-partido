@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Marcador en Vivo{% endblock %}</title>
+  <style>
+    :root { --bg:#0f172a; --card:#1e293b; --txt:#e2e8f0; --muted:#94a3b8; --acc:#22c55e; --warn:#f59e0b; --err:#ef4444; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, sans-serif; background:var(--bg); color:var(--txt); }
+    main { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem; }
+    nav { background:var(--card); padding:.75rem 1rem; display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+    nav a { color:var(--txt); text-decoration:none; } nav a:hover { color:var(--acc); }
+    nav .sp { margin-left:auto; } nav form { display:inline; }
+    a { color: var(--acc); }
+    table { width:100%; border-collapse:collapse; background:var(--card); border-radius:8px; overflow:hidden; }
+    th, td { padding:.6rem .8rem; text-align:left; border-bottom:1px solid #334155; }
+    th { color:var(--muted); font-weight:600; }
+    .btn { display:inline-block; background:var(--acc); color:#052e16; border:0; padding:.45rem .9rem; border-radius:6px; cursor:pointer; text-decoration:none; font-weight:600; }
+    .btn.sec { background:#334155; color:var(--txt); } .btn.peligro { background:var(--err); color:#fff; }
+    .card { background:var(--card); padding:1rem 1.25rem; border-radius:8px; margin-bottom:1rem; }
+    .msg { padding:.6rem .9rem; border-radius:6px; margin-bottom:.6rem; background:#14532d; }
+    .msg.error { background:#7f1d1d; }
+    .badge { padding:.15rem .5rem; border-radius:999px; font-size:.8rem; background:#334155; }
+    .badge.en_juego { background:var(--warn); color:#451a03; } .badge.finalizado { background:var(--acc); color:#052e16; }
+    input, select { background:#0f172a; color:var(--txt); border:1px solid #475569; border-radius:6px; padding:.4rem; }
+    .errorlist { color:#fca5a5; margin:.2rem 0; padding-left:1rem; }
+    form p { margin:.7rem 0; } form label { display:block; color:var(--muted); margin-bottom:.2rem; }
+    footer { text-align:center; color:var(--muted); padding:2rem 0; }
+  </style>
+</head>
+<body>
+  {% include "torneo/partials/_navbar.html" %}
+  <main>
+    {% include "torneo/partials/_messages.html" %}
+    {% block content %}{% endblock %}
+  </main>
+  {% include "torneo/partials/_footer.html" %}
+</body>
+</html>

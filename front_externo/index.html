@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marcador en Vivo · Front externo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header class="top">
+    <div class="marca">
+      <span class="logo" aria-hidden="true"></span>
+      <div>
+        <strong>MARCADOR EN VIVO</strong>
+        <small>Front externo · consume la API REST de Django</small>
+      </div>
+    </div>
+    <div class="top-der">
+      <span class="conexion" id="conexion" title="Estado de la API"><i></i><span>conectando…</span></span>
+      <div id="sesion"></div>
+    </div>
+  </header>
+
+  <nav class="ligas" id="ligas" aria-label="Ligas"></nav>
+
+  <main class="layout">
+    <section class="col-partidos">
+      <div class="seccion-cab">
+        <h2>Partidos</h2>
+        <div class="chips" id="filtros">
+          <button class="chip activo" data-estado="">Todos</button>
+          <button class="chip" data-estado="en_juego"><span class="vivo"></span>En juego</button>
+          <button class="chip" data-estado="programado">Programados</button>
+          <button class="chip" data-estado="finalizado">Finalizados</button>
+        </div>
+      </div>
+
+      <form class="nuevo-partido" id="form-nuevo" hidden>
+        <h3>Nuevo partido <span class="tag">administrador</span></h3>
+        <div class="campos">
+          <label>Local <select name="local" required></select></label>
+          <label>Visita <select name="visita" required></select></label>
+          <label>Fecha <input type="datetime-local" name="fecha" required></label>
+          <label>Estadio <input type="text" name="estadio" maxlength="100" placeholder="Opcional"></label>
+        </div>
+        <button class="btn" type="submit">Crear partido</button>
+      </form>
+
+      <div id="partidos" class="partidos"></div>
+    </section>
+
+    <aside class="col-lateral">
+      <section class="tarjeta">
+        <h2>Tabla de posiciones</h2>
+        <div id="tabla"></div>
+      </section>
+      <section class="tarjeta">
+        <h2>Equipos</h2>
+        <div id="equipos" class="equipos"></div>
+      </section>
+      <section class="tarjeta diagnostico">
+        <h2>Diagnóstico de la API</h2>
+        <p class="ayuda">Prueba cada endpoint del contrato contra <code id="api-url"></code>.</p>
+        <button class="btn secundario" id="btn-diagnostico">Probar conexión</button>
+        <ul id="diagnostico"></ul>
+      </section>
+    </aside>
+  </main>
+
+  <dialog id="dlg-login">
+    <form method="dialog" id="form-login">
+      <h3>Iniciar sesión</h3>
+      <p class="ayuda">Usa un usuario con rol <b>Planillero</b> o <b>Administrador</b> de tu proyecto.</p>
+      <label>Usuario <input name="username" autocomplete="username" required></label>
+      <label>Contraseña <input name="password" type="password" autocomplete="current-password" required></label>
+      <p class="error" id="login-error" hidden></p>
+      <div class="acciones">
+        <button class="btn" type="submit" value="ok">Entrar</button>
+        <button class="btn secundario" type="button" id="btn-cancelar-login">Cancelar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <footer class="pie">Este front no tiene datos propios: todo viene de <code>/api/</code> por <code>fetch</code> con JWT.</footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

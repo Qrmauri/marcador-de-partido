@@ -1,0 +1,20 @@
+{% extends "torneo/base.html" %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+<h1>{{ titulo }}</h1>
+{% if es_admin %}<p><a class="btn" href="{% url prefijo|add:'_create' %}">+ Nuevo {{ singular }}</a></p>{% endif %}
+<table>
+  <tr>{% for h in encabezados %}<th>{{ h }}</th>{% endfor %}<th></th></tr>
+  {% for fila in filas %}
+  <tr>
+    {% for v in fila.valores %}<td>{% if forloop.first %}<a href="{% url prefijo|add:'_detail' fila.obj.pk %}">{{ v }}</a>{% else %}{{ v }}{% endif %}</td>{% endfor %}
+    <td>{% if es_admin %}<a href="{% url prefijo|add:'_update' fila.obj.pk %}">Editar</a> · <a href="{% url prefijo|add:'_delete' fila.obj.pk %}">Borrar</a>{% endif %}</td>
+  </tr>
+  {% empty %}<tr><td colspan="{{ encabezados|length|add:1 }}">Sin registros.</td></tr>{% endfor %}
+</table>
+{% if is_paginated %}<p>
+  {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">« Anterior</a>{% endif %}
+  Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+  {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Siguiente »</a>{% endif %}
+</p>{% endif %}
+{% endblock %}

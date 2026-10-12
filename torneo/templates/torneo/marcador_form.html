@@ -1,0 +1,12 @@
+{% extends "torneo/base.html" %}
+{% block title %}Actualizar marcador{% endblock %}
+{% block content %}
+<h1>Actualizar marcador</h1>
+<form method="post" class="card">
+  {% csrf_token %}
+  <h2>{{ object.local }} vs {{ object.visita }}</h2>
+  {{ form.as_p }}
+  <button class="btn" type="submit">Guardar marcador</button>
+  <a class="btn sec" href="{% url 'partido_detail' object.pk %}">Cancelar</a>
+</form>
+{% endblock %}

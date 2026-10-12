@@ -1,0 +1,15 @@
+{% extends "torneo/base.html" %}
+{% block title %}{{ object }}{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>{{ object.local }} {{ object.goles_local }} - {{ object.goles_visita }} {{ object.visita }}</h1>
+  <p><span class="badge {{ object.estado }}">{{ object.get_estado_display }}</span></p>
+  <p>Liga: {{ object.liga }} · Fecha: {{ object.fecha|date:"d/m/Y H:i" }} · Estadio: {{ object.estadio|default:"—" }}</p>
+</div>
+<a class="btn sec" href="{% url 'partido_list' %}">Volver</a>
+{% if es_admin or es_planillero %}<a class="btn" href="{% url 'partido_marcador' object.pk %}">Actualizar marcador</a>{% endif %}
+{% if es_admin %}
+  <a class="btn" href="{% url 'partido_update' object.pk %}">Editar</a>
+  <a class="btn peligro" href="{% url 'partido_delete' object.pk %}">Borrar</a>
+{% endif %}
+{% endblock %}
